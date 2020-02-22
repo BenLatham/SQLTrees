@@ -1,6 +1,6 @@
 
 
-Welcome to SQLTrees's documentation!
+Welcome to SQLTrees' documentation!
 ====================================
 Trees can be difficult to implement in SQL, This project contains an example of a tree implementation using the
 Adjacency Table approach (also known as a naive tree)
