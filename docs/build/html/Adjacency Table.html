@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Adjacency Table &#8212; SQLTrees 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to SQLTrees’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="adjacency-table">
+<h1>Adjacency Table<a class="headerlink" href="#adjacency-table" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="AdjacencyTable.AdjacencyTable">
+<em class="property">class </em><code class="sig-prename descclassname">AdjacencyTable.</code><code class="sig-name descname">AdjacencyTable</code><span class="sig-paren">(</span><em class="sig-param">database</em><span class="sig-paren">)</span><a class="headerlink" href="#AdjacencyTable.AdjacencyTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>An implementation of a tree using the Adjacency Table approach in sqlite. The tree contains two types of nodes,
+to represent items and categories. Categories can contain other categories and items, while items can only be leaf
+nodes.
+The following operations can be carried out:</p>
+<ul class="simple">
+<li><p>adding new items (use new_item)</p></li>
+<li><p>adding new categories (use new_category)</p></li>
+<li><p>adding categories as subcategories of another category (use new_category)</p></li>
+<li><p>assigning/reassigning items to a category (use categorise_item)</p></li>
+<li><p>moving categories into another category (use move_category)</p></li>
+<li><p>list all items that are descendants of a given node (use list_items)</p></li>
+<li><p>list the direct children of a category, including both categories and items (use list_children)</p></li>
+<li><p>list all categories (use list_categories)</p></li>
+</ul>
+<dl class="method">
+<dt id="AdjacencyTable.AdjacencyTable.categorise_item">
+<code class="sig-name descname">categorise_item</code><span class="sig-paren">(</span><em class="sig-param">item</em>, <em class="sig-param">category</em><span class="sig-paren">)</span><a class="headerlink" href="#AdjacencyTable.AdjacencyTable.categorise_item" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Move an item into a category</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>item</strong> – The id of the item</p></li>
+<li><p><strong>category</strong> – The id of the category</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="AdjacencyTable.AdjacencyTable.delete_category">
+<code class="sig-name descname">delete_category</code><span class="sig-paren">(</span><em class="sig-param">category</em><span class="sig-paren">)</span><a class="headerlink" href="#AdjacencyTable.AdjacencyTable.delete_category" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Delete a category, moving it’s direct children to the root of the tree</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>category</strong> – The category to delete</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean indicating whether delete was successful</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="AdjacencyTable.AdjacencyTable.delete_item">
+<code class="sig-name descname">delete_item</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#AdjacencyTable.AdjacencyTable.delete_item" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Delete an item</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>item</strong> – The item to delete</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean indicating whether delete was successful</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="AdjacencyTable.AdjacencyTable.list_categories">
+<code class="sig-name descname">list_categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#AdjacencyTable.AdjacencyTable.list_categories" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Get a list of the ids and names of all categories</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of the ids and names of all categories</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="AdjacencyTable.AdjacencyTable.list_children">
+<code class="sig-name descname">list_children</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#AdjacencyTable.AdjacencyTable.list_children" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>List all the direct children of a category</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>parent</strong> – The parent category, defaults to None returning items and categories at the root of the tree</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of the ids and names of the categories that are direct children
+and a list of the ids and names of the items that are direct children of the given category</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="AdjacencyTable.AdjacencyTable.list_items">
+<code class="sig-name descname">list_items</code><span class="sig-paren">(</span><em class="sig-param">category=None</em><span class="sig-paren">)</span><a class="headerlink" href="#AdjacencyTable.AdjacencyTable.list_items" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>List the id and name of all items in the given category or its descendants.
+If the category is None then all items are listed</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>category</strong> – The id of the category</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of the ids and names of items within the category</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="AdjacencyTable.AdjacencyTable.move_category">
+<code class="sig-name descname">move_category</code><span class="sig-paren">(</span><em class="sig-param">category</em>, <em class="sig-param">destination</em><span class="sig-paren">)</span><a class="headerlink" href="#AdjacencyTable.AdjacencyTable.move_category" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Make one category a child of another category. Creation of loops is not permitted.
+All descendants of the moved category are now also descendants of the destination category.
+Setting destination to none will move the category to root.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>category</strong> – The id of the category you wish to move</p></li>
+<li><p><strong>destination</strong> – The id of the category you wish to make the category a child of</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a boolean declaring whether the category was successfully moved. Returns False if one of the
+categories given as parameters is not valid, or when attempting to make a category a child of one of it’s
+own descendants.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="AdjacencyTable.AdjacencyTable.new_category">
+<code class="sig-name descname">new_category</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#AdjacencyTable.AdjacencyTable.new_category" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Create a new category</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>name</strong> – Category Name. Must be unique</p></li>
+<li><p><strong>parent</strong> – Containing category if the new category is a sub category</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="AdjacencyTable.AdjacencyTable.new_item">
+<code class="sig-name descname">new_item</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#AdjacencyTable.AdjacencyTable.new_item" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Description</dt>
+<dd class="field-odd"><p>Create a new item</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>name</strong> – The name of the item you wish to create. Must be unique.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">SQLTrees</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Adjacency Table</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to SQLTrees’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ben Latham.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/Adjacency Table.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
